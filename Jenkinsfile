@@ -1,5 +1,9 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'gradle:6.6.1-jre14-openj9'
+        }
+    }
 
     stages {
         stage('Checkout') {
@@ -11,7 +15,7 @@ pipeline {
         stage('Compile') {
             steps {
                 dir('calculator') {
-                    sh './gradlew compileJava'
+                    sh 'gradle compileJava'
                 }
             }
         }
@@ -19,7 +23,7 @@ pipeline {
         stage('Unit Tests') {
             steps {
                 dir('calculator') {
-                    sh './gradlew test'
+                    sh 'gradle test'
                 }
             }
         }
