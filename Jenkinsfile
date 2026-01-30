@@ -10,13 +10,17 @@ pipeline {
 
         stage('Compile') {
             steps {
-                sh './gradlew compileJava'
+                dir('calculator') {
+                    sh './gradlew compileJava'
+                }
             }
         }
 
         stage('Unit Tests') {
             steps {
-                sh './gradlew test'
+                dir('calculator') {
+                    sh './gradlew test'
+                }
             }
         }
     }
